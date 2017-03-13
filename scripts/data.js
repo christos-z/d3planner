@@ -316,7 +316,7 @@
       id = DiabloCalc.legendaryGems[id].id;
     }
     var icon = DiabloCalc.itemIcons[id];
-    var base = location.protocol + "//" + location.hostname + DiabloCalc.relPath + "webgl/icons/";
+    var base = "http://www.d3planner.com/webgl/icons/";
     if (icon && icon[1]) {
       if (typeof icon[1] === "number") {
         return base + icon[1];
@@ -1122,9 +1122,53 @@
     DiabloCalc.onLocaleLoaded = function() {
       DiabloCalc.onDataLoaded = onDataLoaded;
       DiabloCalc.translateMainPage();
-      DC_getScript("data");
+
+        var scripts = [
+          "scripts/data/buffs.js",
+          "scripts/data/classes.js",
+          "scripts/data/gems.js",
+          "scripts/data/item_cache.js",
+          "scripts/data/item_classes.js",
+          "scripts/data/item_feet.js",
+          "scripts/data/item_finger.js",
+          "scripts/data/item_follower.js",
+          "scripts/data/item_hands.js",
+          "scripts/data/item_head.js",
+          "scripts/data/item_icons.js",
+          "scripts/data/item_legs.js",
+          "scripts/data/item_neck.js",
+          "scripts/data/item_offhand.js",
+          "scripts/data/item_onehand.js",
+          "scripts/data/item_ranged.js",
+          "scripts/data/item_shoulders.js",
+          "scripts/data/item_special.js",
+          "scripts/data/item_torso.js",
+          "scripts/data/item_twohand.js",
+          "scripts/data/item_waist.js",
+          "scripts/data/item_wrists.js",
+          "scripts/data/itemsets.js",
+          "scripts/data/simbuffs.js",
+          "scripts/data/skill_barbarian.js",
+          "scripts/data/skill_crusader.js",
+          "scripts/data/skill_demonhunter.js",
+          "scripts/data/skill_monk.js",
+          "scripts/data/skill_witchdoctor.js",
+          "scripts/data/skill_wizard.js",
+          "scripts/data/skilltip_barbarian.js",
+          "scripts/data/skilltip_crusader.js",
+          "scripts/data/skilltip_demonhunter.js",
+          "scripts/data/skilltip_monk.js",
+          "scripts/data/skilltip_witchdoctor.js",
+          "scripts/data/skilltip_wizard.js",
+          "scripts/data/slots.js",
+          "scripts/data/stats.js",
+          "scripts/d3gl_data.js"
+            ];
+
+        DC_getScripts(scripts);
+
     };
     var path = $.cookie("locale");
-    DC_getScript("locale" + (path ? "/" + path : ""));
+      DC_getScript("scripts/locale" + (path ? "/" + path : "/main.js"));
   };
 })();

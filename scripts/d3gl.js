@@ -3,7 +3,7 @@
  * jquery.binarytransport.js
  *
  * @description. jQuery ajax transport for making binary data type requests.
- * @version 1.0 
+ * @version 1.0
  * @author Henry Algus <henryalgus@gmail.com>
  *
  */
@@ -26,7 +26,7 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
     data = options.data || null,
     username = options.username || null,
     password = options.password || null;
-          
+
                 xhr.addEventListener('load', function(){
       var data = {};
       data[options.dataType] = xhr.response;
@@ -35,12 +35,12 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
                 });
 
                 xhr.open(type, url, async, username, password);
-        
+
     // setup custom headers
     for (var i in headers ) {
       xhr.setRequestHeader(i, headers[i] );
     }
-        
+
                 xhr.responseType = dataType;
                 xhr.send(data);
             },
@@ -75,7 +75,10 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
     textureMap[id] = texture;
     texture.texture = null;
     texture.image = new Image();
-    texture.image.onload = function() {
+    texture.crossOrigin = "anonymous";
+    texture.image.src = "webgl/textures/" + id + ".png";
+
+      texture.image.onload = function() {
       texture.texture = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, texture.texture);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
@@ -85,7 +88,7 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
       gl.bindTexture(gl.TEXTURE_2D, null);
     };
-    texture.image.src = "webgl/textures/" + id;
+      // texture.image.src = "http://www.d3planner.com/webgl/textures/" + id;
     return texture.texture;
   }
 
@@ -95,7 +98,7 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
       var rc = {callbacks: []};
       resourceMap[name] = rc;
       $.ajax({
-        url: "webgl/" + name,
+        url: "http://www.d3planner.com/webgl/" + name,
         type: "GET",
         dataType: "binary",
         responseType: "arraybuffer",
@@ -478,15 +481,35 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
     var gl = this.gl;
     if (this.material) {
 //      gl.uniform1f(gl.u_alphaLoc, this.material.alpha(appearance));
-      gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, tint && this.material.tintbase(appearance) || this.material.diffuse(appearance));
-      gl.activeTexture(gl.TEXTURE1);
-      gl.bindTexture(gl.TEXTURE_2D, tint && this.material.tintmask(appearance) || null);
+
+        gl.activeTexture(gl.TEXTURE0);
+        if(this.material.tintbase(appearance) !== null || this.material.diffuse(appearance) !== null) {
+            gl.bindTexture(gl.TEXTURE_2D, tint && this.material.tintbase(appearance) || this.material.diffuse(appearance));
+        }else {
+            var tex = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+        }
+
+        gl.activeTexture(gl.TEXTURE1);
+        if(this.material.tintmask(appearance) !== null) {
+            gl.bindTexture(gl.TEXTURE_2D, tint && this.material.tintmask(appearance) || null);
+        }else {
+            var tex = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+        }
       if (tint) {
         gl.uniform3f(gl.u_TintLoc, tint.r, tint.g, tint.b);
       }
       gl.activeTexture(gl.TEXTURE2);
-      gl.bindTexture(gl.TEXTURE_2D, this.material.specular(appearance));
+        if(this.material.specular(appearance) !== null) {
+            gl.bindTexture(gl.TEXTURE_2D, this.material.specular(appearance));
+        }else {
+            var tex = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+        }
     }
     gl.enableVertexAttribArray(0);
     gl.enableVertexAttribArray(1);
@@ -1258,3 +1281,5 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
   $(".paperdoll-container").prepend(button);
 
 })();
+
+DiabloCalc.onLoaded();

@@ -1,0 +1,20 @@
+precision mediump float;
+varying vec2 v_Color;
+varying vec2 v_Tex;
+
+uniform vec3 u_Tint;
+uniform sampler2D sampler;
+uniform sampler2D sampler_tint;
+uniform sampler2D sampler_spec;
+
+void main() {
+  vec2 texc = v_Tex / 512.0;
+  vec4 tint = texture2D(sampler_tint, texc);
+  vec4 color = texture2D(sampler, texc);
+  vec4 diffuse = vec4(color.rgb * (1.0 - tint.b) + u_Tint * tint.r, color.a);
+  vec4 specular = texture2D(sampler_spec, texc);
+  gl_FragColor = diffuse * vec4(v_Color.rrr, 1) + specular * vec4(v_Color.ggg, 0);
+  if (gl_FragColor.a < 0.01) {
+    discard;
+  }
+}

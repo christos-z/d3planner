@@ -324,7 +324,7 @@ $(function() {
           });
         } else {
           $.ajax({
-            url: "changes",
+            url: "changes.json",
             dataType: "json",
             success: function(data) {
               if (data instanceof Array && data.length) {
@@ -346,13 +346,34 @@ $(function() {
                   newBox.remove();
                 });
               }
-            },
+            }
           });
-        } 
+        }
       }
 
       DiabloCalc.onLoaded = onLoaded;
-      DC_getScript("core");
+        var scripts = [
+            "scripts/common.js",
+            "scripts/bnet-parser.js",
+            "scripts/bnet-tooltips.js",
+            "scripts/stats.js",
+            "scripts/itembox.js",
+            "scripts/skilldata.js",
+            "scripts/skillbox.js",
+            "scripts/account.js",
+            "scripts/ui-paperdoll.js",
+            "scripts/ui-equipment.js",
+            "scripts/ui-import.js",
+            "scripts/ui-paragon.js",
+            "scripts/ui-stats.js",
+            "scripts/ui-skills.js",
+            "scripts/ui-timeline.js",
+            "scripts/ui-simulator.js",
+            "scripts/d3gl_physics.js",
+            "scripts/d3gl.js"];
+
+        DC_getScripts(scripts);
+
     });
   });
 });

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>test</title>
+
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+     <script src="external/getscript.js"></script>
+     <script src="external/tosource.js"></script>
+
+     <link rel="stylesheet" type="text/css" href="external/all.css" />
+     <link rel="stylesheet" type="text/css" href="external/bnet/css/all.css" />
+     <link rel="stylesheet" type="text/css" href="css/all.css" />
+
+     <!--<link rel="stylesheet/less" type="text/css" href="css/classes.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/layout.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/paperdoll.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/simulator.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/skills.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/stash.less" />-->
+     <!--<link rel="stylesheet/less" type="text/css" href="css/timeline.less" />-->
+     <!--<script>-->
+         <!--less = {-->
+             <!--async: true,-->
+             <!--fileAsync: true,-->
+         <!--};-->
+     <!--</script>-->
+     <!--<script src="external/less.min.js"></script>-->
+
+     <script src="external/jquery-2.0.3.js"></script>
+     <script src="external/jquery-ui.min.js"></script>
+     <script src="external/spin.min.js"></script>
+     <script src="external/jquery.cookie.min.js"></script>
+     <script src="external/chosen.jquery.min.js"></script>
+     <script src="external/Chart.min.js"></script>
+     <script src="external/jquery.mousewheel.min.js"></script>
+     <script src="external/mwheelIntent.min.js"></script>
+     <script src="external/md5.js"></script>
+     <script src="external/canvasjs.min.js"></script>
+     <script src="external/jquery.ui.touch-punch.min.js"></script>
+     <script src="external/gl-matrix.min.js"></script>
+     <script src="scripts/errors.js"></script>
+     <script src="scripts/main.js"></script>
+
+ </head>
+ <body class="theme-dark">
+  <div class="page">
+   <div class="col left-banner">
+   </div>
+   <div class="col right-banner">
+   </div>
+
+   <div class="row body">
+    <div class="col dollframe">
+
+     <div id="ptr-link">
+     </div>
+
+     <div id="char-info">
+      <select class="char-class"></select>
+      <label>Level <input type="number" min="70" max="70" value="70" class="char-level"/></label>
+     </div>
+
+     <div class="paperdoll-container">
+      <div class="paperdoll-background">
+      </div>
+     </div>
+
+     <div class="profiles-frame">
+     </div>
+
+    </div>
+
+    <div class="col editframe">
+      <ul>
+       <li class="main-tab"><a href="#tab-equipment">Equipment</a></li>
+       <li class="main-tab"><a href="#tab-paragon">Paragon</a></li>
+       <li class="main-tab"><a href="#tab-skills">Skills/Effects</a></li>
+<!--       <li class="main-tab"><a href="#tab-stash">Stash</a></li>-->
+       <li class="main-tab"><a href="#tab-import">Import/Save</a></li>
+       <li class="main-tab"><a href="#tab-simulator">Simulate</a></li>
+      </ul>
+
+      <div id="tab-equipment" class="scroll-y">
+      </div>
+
+      <div id="tab-paragon" class="scroll-y">
+      </div>
+
+      <div id="tab-skills" class="scroll-y">
+      </div>
+
+<!--      <div id="tab-stash" class="scroll-y">
+      </div>-->
+
+      <div id="tab-import" class="scroll-y">
+      </div>
+
+      <div id="tab-simulator" class="scroll-y">
+      </div>
+
+    </div>
+
+    <div class="col statsframe">
+     <div class="statsframe-list">
+     </div>
+     <div class="timeline-frame">
+     </div>
+    </div>
+
+   </div>
+
+   <div class="row footer">
+    Developed by Riv @ rivsoft.net.
+    <select class="theme-select">
+     <option value="light">Light Theme</option>
+     <option value="dark">Dark Theme</option>
+    </select>
+    <select class="locale-select">
+    </select>
+   </div>
+
+  </div>
+  <div id="console"></div>
+
+ </body>
+
+</html>

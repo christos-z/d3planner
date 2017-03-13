@@ -4498,7 +4498,7 @@ DiabloCalc.webglItems = {
     look: 2190352796,
   },
   Unique_Chest_Set_13_x1: {
-    armortype: 9,
+    armortype: 5,
     look: 2190352770,
   },
   Unique_Chest_Set_14_x1: {
@@ -19635,3 +19635,4 @@ DiabloCalc.webglSkills = {
   wrathoftheberserker: 69936,
   zombiecharger: 291072,
 };
+DiabloCalc.onDataLoaded();
